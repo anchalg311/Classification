@@ -6,7 +6,7 @@ library(NeuralNetTools)
 
 
 ######## Load data ########
-churn <- read.table('C:/Users/ergup/Desktop/Old courses/560/churn.txt', header = T, sep=',', na.strings=c('','NA'))
+churn <- read.table('churn.txt', header = T, sep=',', na.strings=c('','NA'))
 
 churn<- churn[,-c(1,3,4)]
 
@@ -58,7 +58,6 @@ garson(churn.net,x_lab=c('A.Length','A.Code','I.Plan','VM.Plan','VM.Msg','D.Mins
                          'N.Calls','N.Charge','I.Mins','I.Calls','I.Charge','C.Serv.Calls','Churn'),
        y_lab="Importance for classifying Churn")
 
-######Chapter 15######
 
 ####CART model for churn###
 
@@ -85,8 +84,6 @@ churn.CART.cost.predict<- predict(churn.CART.cost,churn.test,type="class")
 
 churn.confMatrix= confusionMatrix(table(churn.CART.cost.predict,churn.test$Churn))
 churn.confMatrix
-
-
 
 
 ###Gain and Lift Charts
