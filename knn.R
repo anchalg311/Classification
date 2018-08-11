@@ -1,10 +1,9 @@
 install.packages("kknn")
 library(kknn)
 
-##############  Chapter 10   #####################
 
-#12. Using the data in table 10.5, find the k-nearest neighbor for Record #10, using k = 3.
-#Recreate the data from table 10.5
+#Find the k-nearest neighbor for Record #10, using k = 3.
+#Recreate the data 
 age <- c(22,33,28,51,25,39,54,55,50,66)
 
 marital <- c("Single","Married","Other","Other","Single","Single","Single",
