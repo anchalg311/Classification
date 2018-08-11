@@ -6,7 +6,7 @@ library(pROC)
 
 
 ########### Load churn dataset #########
-churn <- read.table('C:/Users/ergup/Desktop/Old_courses/560/churn.txt', header = T, sep=',', na.strings=c('','NA'))
+churn <- read.table('churn.txt', header = T, sep=',', na.strings=c('','NA'))
 names(churn) <- c("State","Account.Length","Area.Code","Phone","Intl.Plan.","VMail.Plan","VMail.Message","Day.Mins" ,"Day.Calls" ,
                   "Day.Charge","Eve.Mins" ,"Eve.Calls","Eve.Charge","Night.Mins","Night.Calls" ,"Night.Charge","Intl.Mins" ,"Intl.Calls",
                   "Intl.Charge","CustServ.Calls" ,"Churn.")
