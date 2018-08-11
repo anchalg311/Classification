@@ -1,0 +1,79 @@
+---
+title: "SVM"
+author: "Anchal Gupta"
+date: "August 11, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(e1071)
+```
+
+```{r}
+
+data(Glass)
+
+##normalizing Glass
+Glass$Glass.Window<- as.factor(Glass$Glass.Window)
+
+
+Glass<-as.data.frame(Glass)
+
+for(i in 1:ncol(Glass))
+{
+  if(is.numeric(Glass[,i])){  ####checks whether the variable is numerical , If yes, then normalize it
+    Glass[,i]<- ( Glass[,i]-min(Glass[,i])) / (max(Glass[,i])-min(Glass[,i]))
+  }
+}
+
+##40% of the sample size
+smp_size <- floor(0.40 * nrow(Glass))
+smp_size
+## set the seed to make your partition reproductible
+set.seed(123)
+train_ind <- sample(seq_len(nrow(Glass)), size = smp_size)
+Glass.train <- Glass[train_ind, ]
+Glass.test <- Glass[-train_ind, ]
+
+
+Glass.svm <- svm(Glass.train$Glass.Window ~ ., data=Glass.train)
+summary(Glass.svm)
+
+plot(Glass.svm,data=Glass.train)
+
+plot(Glass.svm,data=Glass.train,
+     Na~ Ca , slice = list( Refractive.Index=0.5,Si=0.5))
+
+Glass.svm.pred <- predict(Glass.svm, Glass.test)
+confusionMatrix(Glass.svm.pred, Glass.test$Glass.Window)
+```
+
+
+### Iris dataset ####
+
+```{r}
+data("iris")
+
+smp_size <- floor(0.40 * nrow(iris))
+smp_size
+## set the seed to make your partition reproductible
+set.seed(123)
+train_ind <- sample(seq_len(nrow(iris)), size = smp_size)
+iris.train <- iris[train_ind, ]
+iris.test <- iris[-train_ind, ]
+
+
+Iris.svm<- svm(Species~., data=iris.train)
+summary(Iris.svm)
+
+plot(Iris.svm, data=iris.train, Petal.Width~ Petal.Length,
+     slice= list(Sepal.Width=3,Sepal.Length=4))
+
+Iris.svm.predict<- predict(Iris.svm,iris.test)
+confusionMatrix(Iris.svm.predict, iris.test$Species)
+
+```
